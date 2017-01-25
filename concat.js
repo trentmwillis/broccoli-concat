@@ -4,7 +4,6 @@ var fs = require('fs-extra');
 var merge = require('lodash.merge');
 var omit = require('lodash.omit');
 var uniq = require('lodash.uniq');
-var mkdirp = require('mkdirp');
 
 var ensureNoGlob = require('./lib/utils/ensure-no-glob');
 var ensurePosix = require('./lib/utils/ensure-posix');
@@ -83,7 +82,7 @@ Concat.prototype.build = function() {
   var firstSection = true;
   var outputFile = path.join(this.outputPath, this.outputFile);
 
-  mkdirp.sync(path.dirname(outputFile));
+  fs.mkdirpSync(path.dirname(outputFile));
 
   this.concat = new this.Strategy(merge(this.sourceMapConfig, {
     outputFile: outputFile,
